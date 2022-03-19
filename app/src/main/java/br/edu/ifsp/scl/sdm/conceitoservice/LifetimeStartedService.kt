@@ -2,7 +2,10 @@ package br.edu.ifsp.scl.sdm.conceitoservice
 
 import android.app.Service
 import android.content.Intent
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
+import android.os.Message
 
 class LifetimeStartedService : Service() {
     //contador de segundos
@@ -53,5 +56,15 @@ class LifetimeStartedService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         workerThread.running = false
+    }
+    private inner class LifetimeServiceHandler(LefetimeServiceLooper: Looper): Handler(lifetimeServiceLooper){
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            if (connect){
+                runOniThread {
+
+                }
+            }
+        }
     }
 }
